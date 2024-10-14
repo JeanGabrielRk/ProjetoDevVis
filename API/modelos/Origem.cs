@@ -13,7 +13,7 @@ public class Origem {
     public string? Pais { get; set; }
 
     
-    public int IdPlanta { get; set; }
+    public ICollection<Planta> Plantas { get; set; } = new List<Planta>();
 
     
 

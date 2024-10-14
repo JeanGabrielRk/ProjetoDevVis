@@ -14,4 +14,12 @@ public class AppDataContext : DbContext
     {
         optionsBuilder.UseSqlite("Data Source=app.db");
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Planta>()
+            .HasOne(p => p.Origem)
+            .WithMany(o => o.Plantas)
+            .HasForeignKey(p => p.OrigemId); 
+    }
 }

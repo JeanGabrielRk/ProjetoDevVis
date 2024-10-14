@@ -11,7 +11,7 @@ public class Planta
 
     public DateTime CriadoEm { get; set; } = DateTime.Now;
 
-    public int IdOrigem { get; set; }
+    public int OrigemId { get; set; }
 
     public required Origem Origem { get; set; }
     

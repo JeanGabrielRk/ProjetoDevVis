@@ -43,3 +43,5 @@ Content-Type: application/json
 ### Listar todas as origens
 GET http://localhost:5022/api/origens/listar
 
+### Buscar origem pelo id
+GET http://localhost:5022/api/origens/buscar/1 
