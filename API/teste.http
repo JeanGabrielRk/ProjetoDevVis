@@ -1,0 +1,33 @@
+### Testar a raiz do projeto
+
+GET http://localhost:5022
+
+### Listar todas as plantas
+
+GET http://localhost:5022/api/plantas/listar
+
+### Buscar uma planta pelo id
+
+GET http://localhost:5022/api/plantas/buscar/1
+
+### Deletar uma tarefa pelo id
+
+DELETE http://localhost:5022/api/plantas/deletar/2
+
+### Cadastrar planta
+
+POST http://localhost:5022/api/plantas/cadastrar
+Content-Type: application/json
+
+{
+    "nome": "Planta 1"
+}
+
+### Alterar planta
+
+PUT http://localhost:5022/api/plantas/alterar/1
+Content-Type: application/json
+
+{
+    "nome": "Planta nova adicionada"
+}
