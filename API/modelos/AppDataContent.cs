@@ -7,6 +7,7 @@ public class AppDataContext : DbContext
 {
     public DbSet<Planta> Plantas { get; set; }
 
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlite("Data Source=app.db");
