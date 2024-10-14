@@ -48,3 +48,11 @@ GET http://localhost:5022/api/origens/buscar/1
 
 ### Deletar origem pelo id
 DELETE http://localhost:5022/api/origens/deletar/1 
+
+### Alterar origem
+PUT http://localhost:5022/api/origens/alterar/1
+Content-Type: application/json
+
+{
+    "pais": "Pais alterado"
+}

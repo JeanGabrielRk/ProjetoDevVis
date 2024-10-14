@@ -96,4 +96,17 @@ app.MapDelete("/api/origens/deletar/{id}", ([FromRoute] int id, [FromServices] A
     return Results.Ok(origem);
 });
 
+app.MapPut("/api/origens/alterar/{id}", ([FromRoute] int id, [FromBody] Origem origemAlterada, [FromServices] AppDataContext ctx) => 
+{
+    Origem? origem = ctx.Origens.Find(id);
+    if(origem is null)
+    {
+        return Results.NotFound();
+    }
+    origem.Pais = origemAlterada.Pais;
+    ctx.Origens.Update(origem);
+    ctx.SaveChanges();
+    return Results.Ok(origem);
+});
+
 app.Run();
