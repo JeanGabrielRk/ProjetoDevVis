@@ -65,4 +65,13 @@ app.MapPost("/api/origens/cadastrar", ([FromBody] Origem origem, [FromServices] 
     return Results.Created(" ", origem);
 });
 
+app.MapGet("/api/origens/listar", ([FromBody] Origem origens, [FromServices] AppDataContext ctx) => 
+{
+    if(ctx.Origens.Any())
+    {
+        return Results.Ok(ctx.Origens.ToList());
+    }
+    return Results.NotFound();
+});
+
 app.Run();

@@ -39,3 +39,7 @@ Content-Type: application/json
 {
     "pais": "Brasil"
 }
+
+### Listar todas as origens
+GET http://localhost:5022/api/origens/listar
+
