@@ -17,6 +17,6 @@ public class Planta
     public required Origem Origem { get; set; }
 
      public int TipoId { get; set; } 
-     public Tipo? Tipo { get; set; }
+     public required Tipo Tipo { get; set; }
     
 }
