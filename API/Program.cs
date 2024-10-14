@@ -1,3 +1,4 @@
+using API.modelos;
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -107,6 +108,67 @@ app.MapPut("/api/origens/alterar/{id}", ([FromRoute] int id, [FromBody] Origem o
     ctx.Origens.Update(origem);
     ctx.SaveChanges();
     return Results.Ok(origem);
+});
+
+app.MapPost("/api/tipo/cadastrar", ([FromBody] Tipo tipo, [FromServices] AppDataContext ctx) => 
+{
+    
+    ctx.Tipo.Add(tipo);
+    ctx.SaveChanges();
+    return Results.Created($"/api/tipo/buscar/{tipo}", tipo); 
+});
+
+app.MapGet("/api/tipo/listar", ([FromServices] AppDataContext ctx) => 
+{
+   
+    var tipo = ctx.Tipo.ToList();
+    if (tipo.Any())
+    {
+        return Results.Ok(tipo); 
+    }
+    return Results.NotFound(); 
+});
+
+app.MapGet("/api/tipo/buscar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
+{
+    
+    Tipo? tipo = ctx.Tipo.Find(id);
+    if (tipo is null)
+    {
+        return Results.NotFound(); 
+    }
+    return Results.Ok(tipo); 
+});
+
+app.MapDelete("/api/tipo/deletar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
+{
+   
+    Tipo? tipo = ctx.Tipo.Find(id);
+    if (tipo is null)
+    {
+        return Results.NotFound(); 
+    }
+    ctx.Tipo.Remove(tipo); 
+    ctx.SaveChanges();
+    return Results.Ok(tipo);
+});
+
+app.MapPut("/api/tipo/alterar/{id}", ([FromRoute] int id, [FromBody] Tipo tipoAlterado, [FromServices] AppDataContext ctx) => 
+{
+    
+    Tipo? tipo = ctx.Tipo.Find(id);
+    if (tipo is null)
+    {
+        return Results.NotFound(); 
+    }
+
+    
+    tipo.Nome = tipoAlterado.Nome;
+
+    
+    ctx.Tipo.Update(tipo);
+    ctx.SaveChanges();
+    return Results.Ok(tipo); 
 });
 
 app.Run();

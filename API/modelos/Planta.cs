@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using API.modelos;
 
 namespace API.Models;
 
@@ -14,5 +15,8 @@ public class Planta
     public int OrigemId { get; set; }
 
     public required Origem Origem { get; set; }
+
+     public int TipoId { get; set; } 
+     public Tipo? Tipo { get; set; }
     
 }

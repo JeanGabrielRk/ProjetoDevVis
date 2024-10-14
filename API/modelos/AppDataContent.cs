@@ -24,5 +24,6 @@ public class AppDataContext : DbContext
             .HasOne(p => p.Origem)
             .WithMany(o => o.Plantas)
             .HasForeignKey(p => p.OrigemId); 
+            
     }
 }
