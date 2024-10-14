@@ -84,4 +84,16 @@ app.MapGet("/api/origens/buscar/{id}", ([FromRoute] int id, [FromServices] AppDa
     return Results.Ok(origem);
 });
 
+app.MapDelete("/api/origens/deletar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
+{
+    Origem? origem = ctx.Origens.Find(id);
+    if(origem is null)
+    {
+        return Results.NotFound();
+    }
+    ctx.Origens.Remove(origem);
+    ctx.SaveChanges();
+    return Results.Ok(origem);
+});
+
 app.Run();

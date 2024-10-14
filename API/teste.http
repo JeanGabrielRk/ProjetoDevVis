@@ -45,3 +45,6 @@ GET http://localhost:5022/api/origens/listar
 
 ### Buscar origem pelo id
 GET http://localhost:5022/api/origens/buscar/1 
+
+### Deletar origem pelo id
+DELETE http://localhost:5022/api/origens/deletar/1 
