@@ -25,5 +25,10 @@ public class AppDataContext : DbContext
             .WithMany(o => o.Plantas)
             .HasForeignKey(p => p.OrigemId); 
             
+    modelBuilder.Entity<Planta>()
+                .HasOne(p => p.Tipo)           
+                .WithMany()                    
+                .HasForeignKey(p => p.TipoId)  
+                .OnDelete(DeleteBehavior.SetNull); 
+        }
     }
-}
