@@ -31,3 +31,11 @@ Content-Type: application/json
 {
     "nome": "Planta nova adicionada"
 }
+
+### Cadastrar origem
+POST http://localhost:5022/api/origens/cadastrar
+Content-Type: application/json
+
+{
+    "pais": "Brasil"
+}

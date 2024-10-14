@@ -58,4 +58,11 @@ app.MapPut("/api/plantas/alterar/{id}", ([FromRoute] int id, [FromBody] Planta p
     return Results.Ok(planta);
 });
 
+app.MapPost("/api/origens/cadastrar", ([FromBody] Origem origem, [FromServices] AppDataContext ctx) => 
+{
+    ctx.Origens.Add(origem);
+    ctx.SaveChanges();
+    return Results.Created(" ", origem);
+});
+
 app.Run();

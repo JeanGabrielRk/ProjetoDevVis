@@ -7,6 +7,8 @@ public class AppDataContext : DbContext
 {
     public DbSet<Planta> Plantas { get; set; }
 
+    public DbSet<Origem> Origens { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
