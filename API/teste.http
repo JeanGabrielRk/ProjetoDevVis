@@ -56,3 +56,38 @@ Content-Type: application/json
 {
     "pais": "Pais alterado"
 }
+
+### Cadastrar Tipos de plantas
+
+POST http://localhost:5022/api/tipos/cadastrar
+Content-Type: application/json
+
+{
+    "tipo": "Cacto"
+}
+
+### Listar os Tipos de Plantas 
+
+GET http://localhost:5022/api/tipos/listar
+
+### Buscar os tipos de Plantas
+
+GET http://localhost:5022/api/tipos/buscar/1
+
+
+### Deletar um Tipo pelo id
+
+DELETE http://localhost:5022/api/tipos/deletar/1
+
+### Alterar o Tipo da Planta
+
+PUT http://localhost:5022/api/tipos/alterar/1
+Content-Type: application/json
+
+{
+    "tipo": "Samambaia"
+}
+
+
+
+
