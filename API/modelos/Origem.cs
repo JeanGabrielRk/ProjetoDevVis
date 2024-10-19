@@ -14,8 +14,5 @@ public class Origem {
 
     
     public ICollection<Planta> Plantas { get; set; } = new List<Planta>();
-
-    
-
     
 }

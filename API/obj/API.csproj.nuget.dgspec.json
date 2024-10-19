@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projeto Desenvolvimento W\\ProjetoDevVis\\API\\API.csproj": {}
+    "C:\\Users\\Jean Gabriel\\OneDrive\\Área de Trabalho\\ProjetoDevVis\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Projeto Desenvolvimento W\\ProjetoDevVis\\API\\API.csproj": {
+    "C:\\Users\\Jean Gabriel\\OneDrive\\Área de Trabalho\\ProjetoDevVis\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projeto Desenvolvimento W\\ProjetoDevVis\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Jean Gabriel\\OneDrive\\Área de Trabalho\\ProjetoDevVis\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Projeto Desenvolvimento W\\ProjetoDevVis\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\Maywo\\.nuget\\packages\\",
-        "outputPath": "C:\\Projeto Desenvolvimento W\\ProjetoDevVis\\API\\obj\\",
+        "projectPath": "C:\\Users\\Jean Gabriel\\OneDrive\\Área de Trabalho\\ProjetoDevVis\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\Jean Gabriel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jean Gabriel\\OneDrive\\Área de Trabalho\\ProjetoDevVis\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Maywo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Jean Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"

@@ -10,7 +10,7 @@ public class AppDataContext : DbContext
 
     public DbSet<Origem> Origens { get; set; }
 
-    public DbSet<Tipo> Tipo { get; set; }
+    public DbSet<Tipo> Tipos { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

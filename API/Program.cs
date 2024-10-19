@@ -110,18 +110,18 @@ app.MapPut("/api/origens/alterar/{id}", ([FromRoute] int id, [FromBody] Origem o
     return Results.Ok(origem);
 });
 
-app.MapPost("/api/tipo/cadastrar", ([FromBody] Tipo tipo, [FromServices] AppDataContext ctx) => 
+app.MapPost("/api/tipos/cadastrar", ([FromBody] Tipo tipo, [FromServices] AppDataContext ctx) => 
 {
     
-    ctx.Tipo.Add(tipo);
+    ctx.Tipos.Add(tipo);
     ctx.SaveChanges();
     return Results.Created($"/api/tipo/buscar/{tipo}", tipo); 
 });
 
-app.MapGet("/api/tipo/listar", ([FromServices] AppDataContext ctx) => 
+app.MapGet("/api/tipos/listar", ([FromServices] AppDataContext ctx) => 
 {
    
-    var tipo = ctx.Tipo.ToList();
+    var tipo = ctx.Tipos.ToList();
     if (tipo.Any())
     {
         return Results.Ok(tipo); 
@@ -129,10 +129,10 @@ app.MapGet("/api/tipo/listar", ([FromServices] AppDataContext ctx) =>
     return Results.NotFound(); 
 });
 
-app.MapGet("/api/tipo/buscar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
+app.MapGet("/api/tipos/buscar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
 {
     
-    Tipo? tipo = ctx.Tipo.Find(id);
+    Tipo? tipo = ctx.Tipos.Find(id);
     if (tipo is null)
     {
         return Results.NotFound(); 
@@ -140,33 +140,31 @@ app.MapGet("/api/tipo/buscar/{id}", ([FromRoute] int id, [FromServices] AppDataC
     return Results.Ok(tipo); 
 });
 
-app.MapDelete("/api/tipo/deletar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
+app.MapDelete("/api/tipos/deletar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
 {
    
-    Tipo? tipo = ctx.Tipo.Find(id);
+    Tipo? tipo = ctx.Tipos.Find(id);
     if (tipo is null)
     {
         return Results.NotFound(); 
     }
-    ctx.Tipo.Remove(tipo); 
+    ctx.Tipos.Remove(tipo); 
     ctx.SaveChanges();
     return Results.Ok(tipo);
 });
 
-app.MapPut("/api/tipo/alterar/{id}", ([FromRoute] int id, [FromBody] Tipo tipoAlterado, [FromServices] AppDataContext ctx) => 
+app.MapPut("/api/tipos/alterar/{id}", ([FromRoute] int id, [FromBody] Tipo tipoAlterado, [FromServices] AppDataContext ctx) => 
 {
     
-    Tipo? tipo = ctx.Tipo.Find(id);
+    Tipo? tipo = ctx.Tipos.Find(id);
     if (tipo is null)
     {
         return Results.NotFound(); 
     }
 
-    
     tipo.Nome = tipoAlterado.Nome;
 
-    
-    ctx.Tipo.Update(tipo);
+    ctx.Tipos.Update(tipo);
     ctx.SaveChanges();
     return Results.Ok(tipo); 
 });
