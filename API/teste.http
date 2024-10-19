@@ -8,7 +8,7 @@ GET http://localhost:5022/api/plantas/listar
 GET http://localhost:5022/api/plantas/buscar/1
 
 ### Deletar uma planta pelo id
-DELETE http://localhost:5022/api/plantas/deletar/2
+DELETE http://localhost:5022/api/plantas/deletar/1
 
 ### Cadastrar planta
 POST http://localhost:5022/api/plantas/cadastrar
