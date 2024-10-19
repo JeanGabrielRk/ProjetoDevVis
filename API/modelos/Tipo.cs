@@ -8,7 +8,7 @@ namespace API.Models
     {
         [Key]
         public int TipoId { get; set; }
-        public string Nome { get; set; } // Removido o '?', já que deve ser obrigatório
+        public string? Nome { get; set; } 
         public DateTime CriadoEm { get; set; } = DateTime.Now;
         public ICollection<Planta> Plantas { get; set; } = new List<Planta>();
     }

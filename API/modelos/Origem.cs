@@ -8,7 +8,7 @@ namespace API.Models
     {
         [Key]
         public int IdOrigem { get; set; }
-        public string Pais { get; set; } // Removido o '?', já que deve ser obrigatório
+        public string? Pais { get; set; } 
         public ICollection<Planta> Plantas { get; set; } = new List<Planta>();
     }
 }

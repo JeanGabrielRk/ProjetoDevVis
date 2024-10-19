@@ -35,7 +35,7 @@ POST http://localhost:5022/api/origens/cadastrar
 Content-Type: application/json
 
 {
-    "Pais": "Brasil"
+    "Pais": "Italia"
 }
 
 ### Listar todas as origens

@@ -2386,11 +2386,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jean Gabriel\\OneDrive\\Área de Trabalho\\ProjetoDevVis\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\Jean Gabriel\\Downloads\\ProjetoDevVis\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\Jean Gabriel\\OneDrive\\Área de Trabalho\\ProjetoDevVis\\API\\API.csproj",
+      "projectPath": "C:\\Users\\Jean Gabriel\\Downloads\\ProjetoDevVis\\API\\API.csproj",
       "packagesPath": "C:\\Users\\Jean Gabriel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jean Gabriel\\OneDrive\\Área de Trabalho\\ProjetoDevVis\\API\\obj\\",
+      "outputPath": "C:\\Users\\Jean Gabriel\\Downloads\\ProjetoDevVis\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Jean Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config"
