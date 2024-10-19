@@ -1,4 +1,4 @@
-using API.modelos;
+using Microsoft.EntityFrameworkCore;
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,131 +8,151 @@ var app = builder.Build();
 
 app.MapGet("/", () => "ECO PLANTA");
 
-app.MapPost("/api/plantas/cadastrar", ([FromBody] Planta planta, [FromServices] AppDataContext ctx) => 
+app.MapPost("/api/plantas/cadastrar", async ([FromBody] Planta planta, [FromServices] AppDataContext ctx) => 
 {
+    if (planta.OrigemId <= 0 || planta.TipoId <= 0)
+    {
+        return Results.BadRequest("OrigemId e TipoId são obrigatórios.");
+    }
+
+    if (!await ctx.Origens.AnyAsync(o => o.IdOrigem == planta.OrigemId) ||
+        !await ctx.Tipos.AnyAsync(t => t.TipoId == planta.TipoId))
+    {
+        return Results.BadRequest("OrigemId ou TipoId inválidos.");
+    }
+
     ctx.Plantas.Add(planta);
-    ctx.SaveChanges();
-    return Results.Created("", planta);
+    await ctx.SaveChangesAsync();
+    
+    return Results.Created($"/api/plantas/buscar/{planta.IdPlanta}", planta);
 });
 
-app.MapGet("/api/plantas/buscar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
+app.MapGet("/api/plantas/buscar/{id}", async ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
 {
-    Planta? planta = ctx.Plantas.Find(id);
-    if(planta is null)
+    Planta? planta = await ctx.Plantas.Include(p => p.Origem).Include(p => p.Tipo).FirstOrDefaultAsync(p => p.IdPlanta == id);
+    if (planta is null)
     {
         return Results.NotFound();
     }
     return Results.Ok(planta);
 });
 
-app.MapGet("/api/plantas/listar", ([FromBody] Planta planta, [FromServices] AppDataContext ctx) => 
+app.MapGet("/api/plantas/listar", async ([FromServices] AppDataContext ctx) => 
 {
-    if(ctx.Plantas.Any())
+    var plantas = await ctx.Plantas.Include(p => p.Origem).Include(p => p.Tipo).ToListAsync();
+    if (plantas.Any())
     {
-        return Results.Ok(ctx.Plantas.ToList());
+        return Results.Ok(plantas);
     }
     return Results.NotFound();
 });
 
-app.MapDelete("/api/plantas/deletar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
+app.MapDelete("/api/plantas/deletar/{id}", async ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
 {
-    Planta? planta = ctx.Plantas.Find(id);
-    if(planta is null)
+    Planta? planta = await ctx.Plantas.FindAsync(id);
+    if (planta is null)
     {
         return Results.NotFound();
     }
     ctx.Plantas.Remove(planta);
-    ctx.SaveChanges();
+    await ctx.SaveChangesAsync();
     return Results.Ok(planta);
 });
 
-app.MapPut("/api/plantas/alterar/{id}", ([FromRoute] int id, [FromBody] Planta plantaAlterada, [FromServices] AppDataContext ctx) => 
+app.MapPut("/api/plantas/alterar/{id}", async ([FromRoute] int id, [FromBody] Planta plantaAlterada, [FromServices] AppDataContext ctx) => 
 {
-    Planta? planta = ctx.Plantas.Find(id);
-    if(planta is null)
+    Planta? planta = await ctx.Plantas.FindAsync(id);
+    if (planta is null)
     {
         return Results.NotFound();
     }
+
     planta.Nome = plantaAlterada.Nome;
-    ctx.Plantas.Update(planta);
-    ctx.SaveChanges();
+
+    if (plantaAlterada.OrigemId > 0)
+    {
+        planta.OrigemId = plantaAlterada.OrigemId;
+    }
+    if (plantaAlterada.TipoId > 0)
+    {
+        planta.TipoId = plantaAlterada.TipoId;
+    }
+    
+    await ctx.SaveChangesAsync();
     return Results.Ok(planta);
 });
 
-app.MapPost("/api/origens/cadastrar", ([FromBody] Origem origem, [FromServices] AppDataContext ctx) => 
+app.MapPost("/api/origens/cadastrar", async ([FromBody] Origem origem, [FromServices] AppDataContext ctx) => 
 {
     ctx.Origens.Add(origem);
-    ctx.SaveChanges();
-    return Results.Created(" ", origem);
+    await ctx.SaveChangesAsync();
+    return Results.Created($"/api/origens/buscar/{origem.IdOrigem}", origem);
 });
 
-app.MapGet("/api/origens/listar", ([FromBody] Origem origens, [FromServices] AppDataContext ctx) => 
+app.MapGet("/api/origens/listar", async ([FromServices] AppDataContext ctx) => 
 {
-    if(ctx.Origens.Any())
+    var origens = await ctx.Origens.ToListAsync();
+    if (origens.Any())
     {
-        return Results.Ok(ctx.Origens.ToList());
+        return Results.Ok(origens);
     }
     return Results.NotFound();
 });
 
-app.MapGet("/api/origens/buscar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
+app.MapGet("/api/origens/buscar/{id}", async ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
 {
-    Origem? origem = ctx.Origens.Find(id);
-    if(origem is null)
+    Origem? origem = await ctx.Origens.FindAsync(id);
+    if (origem is null)
     {
         return Results.NotFound();
     }
     return Results.Ok(origem);
 });
 
-app.MapDelete("/api/origens/deletar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
+app.MapDelete("/api/origens/deletar/{id}", async ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
 {
-    Origem? origem = ctx.Origens.Find(id);
-    if(origem is null)
+    Origem? origem = await ctx.Origens.FindAsync(id);
+    if (origem is null)
     {
         return Results.NotFound();
     }
     ctx.Origens.Remove(origem);
-    ctx.SaveChanges();
+    await ctx.SaveChangesAsync();
     return Results.Ok(origem);
 });
 
-app.MapPut("/api/origens/alterar/{id}", ([FromRoute] int id, [FromBody] Origem origemAlterada, [FromServices] AppDataContext ctx) => 
+app.MapPut("/api/origens/alterar/{id}", async ([FromRoute] int id, [FromBody] Origem origemAlterada, [FromServices] AppDataContext ctx) => 
 {
-    Origem? origem = ctx.Origens.Find(id);
-    if(origem is null)
+    Origem? origem = await ctx.Origens.FindAsync(id);
+    if (origem is null)
     {
         return Results.NotFound();
     }
     origem.Pais = origemAlterada.Pais;
-    ctx.Origens.Update(origem);
-    ctx.SaveChanges();
+    await ctx.SaveChangesAsync();
     return Results.Ok(origem);
 });
 
-app.MapPost("/api/tipos/cadastrar", ([FromBody] Tipo tipo, [FromServices] AppDataContext ctx) => 
+app.MapPost("/api/tipos/cadastrar", async ([FromBody] Tipo tipo, [FromServices] AppDataContext ctx) => 
 {
-    
     ctx.Tipos.Add(tipo);
-    ctx.SaveChanges();
-    return Results.Created($"/api/tipo/buscar/{tipo}", tipo); 
+    await ctx.SaveChangesAsync();
+    return Results.Created($"/api/tipos/buscar/{tipo.TipoId}", tipo); 
 });
 
-app.MapGet("/api/tipos/listar", ([FromServices] AppDataContext ctx) => 
+app.MapGet("/api/tipos/listar", async ([FromServices] AppDataContext ctx) => 
 {
-   
-    var tipo = ctx.Tipos.ToList();
-    if (tipo.Any())
+    var tipos = await ctx.Tipos.ToListAsync();
+    if (tipos.Any())
     {
-        return Results.Ok(tipo); 
+        return Results.Ok(tipos); 
     }
     return Results.NotFound(); 
 });
 
-app.MapGet("/api/tipos/buscar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
+app.MapGet("/api/tipos/buscar/{id}", async ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
 {
-    
-    Tipo? tipo = ctx.Tipos.Find(id);
+    Tipo? tipo = await ctx.Tipos.FindAsync(id);
     if (tipo is null)
     {
         return Results.NotFound(); 
@@ -140,32 +160,27 @@ app.MapGet("/api/tipos/buscar/{id}", ([FromRoute] int id, [FromServices] AppData
     return Results.Ok(tipo); 
 });
 
-app.MapDelete("/api/tipos/deletar/{id}", ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
+app.MapDelete("/api/tipos/deletar/{id}", async ([FromRoute] int id, [FromServices] AppDataContext ctx) => 
 {
-   
-    Tipo? tipo = ctx.Tipos.Find(id);
+    Tipo? tipo = await ctx.Tipos.FindAsync(id);
     if (tipo is null)
     {
         return Results.NotFound(); 
     }
     ctx.Tipos.Remove(tipo); 
-    ctx.SaveChanges();
+    await ctx.SaveChangesAsync();
     return Results.Ok(tipo);
 });
 
-app.MapPut("/api/tipos/alterar/{id}", ([FromRoute] int id, [FromBody] Tipo tipoAlterado, [FromServices] AppDataContext ctx) => 
+app.MapPut("/api/tipos/alterar/{id}", async ([FromRoute] int id, [FromBody] Tipo tipoAlterado, [FromServices] AppDataContext ctx) => 
 {
-    
-    Tipo? tipo = ctx.Tipos.Find(id);
+    Tipo? tipo = await ctx.Tipos.FindAsync(id);
     if (tipo is null)
     {
         return Results.NotFound(); 
     }
-
     tipo.Nome = tipoAlterado.Nome;
-
-    ctx.Tipos.Update(tipo);
-    ctx.SaveChanges();
+    await ctx.SaveChangesAsync();
     return Results.Ok(tipo); 
 });
 

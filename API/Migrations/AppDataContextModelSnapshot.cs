@@ -24,6 +24,7 @@ namespace API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Pais")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("IdOrigem");
@@ -41,6 +42,7 @@ namespace API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("OrigemId")
@@ -49,21 +51,16 @@ namespace API.Migrations
                     b.Property<int>("TipoId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("TipoId1")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("IdPlanta");
 
                     b.HasIndex("OrigemId");
 
                     b.HasIndex("TipoId");
 
-                    b.HasIndex("TipoId1");
-
                     b.ToTable("Plantas");
                 });
 
-            modelBuilder.Entity("API.modelos.Tipo", b =>
+            modelBuilder.Entity("API.Models.Tipo", b =>
                 {
                     b.Property<int>("TipoId")
                         .ValueGeneratedOnAdd()
@@ -73,11 +70,12 @@ namespace API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("TipoId");
 
-                    b.ToTable("Tipo");
+                    b.ToTable("Tipos");
                 });
 
             modelBuilder.Entity("API.Models.Planta", b =>
@@ -88,15 +86,11 @@ namespace API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.modelos.Tipo", "Tipo")
-                        .WithMany()
+                    b.HasOne("API.Models.Tipo", "Tipo")
+                        .WithMany("Plantas")
                         .HasForeignKey("TipoId")
                         .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
-
-                    b.HasOne("API.modelos.Tipo", null)
-                        .WithMany("Plantas")
-                        .HasForeignKey("TipoId1");
 
                     b.Navigation("Origem");
 
@@ -108,7 +102,7 @@ namespace API.Migrations
                     b.Navigation("Plantas");
                 });
 
-            modelBuilder.Entity("API.modelos.Tipo", b =>
+            modelBuilder.Entity("API.Models.Tipo", b =>
                 {
                     b.Navigation("Plantas");
                 });

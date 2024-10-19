@@ -1,34 +1,30 @@
-using System;
-using API.modelos;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Models;
-
-public class AppDataContext : DbContext
+namespace API.Models
 {
-    public DbSet<Planta> Plantas { get; set; }
-
-    public DbSet<Origem> Origens { get; set; }
-
-    public DbSet<Tipo> Tipos { get; set; }
-
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public class AppDataContext : DbContext
     {
-        optionsBuilder.UseSqlite("Data Source=app.db");
-    }
+        public DbSet<Planta> Plantas { get; set; }
+        public DbSet<Origem> Origens { get; set; }
+        public DbSet<Tipo> Tipos { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Planta>()
-            .HasOne(p => p.Origem)
-            .WithMany(o => o.Plantas)
-            .HasForeignKey(p => p.OrigemId); 
-            
-    modelBuilder.Entity<Planta>()
-                .HasOne(p => p.Tipo)           
-                .WithMany()                    
-                .HasForeignKey(p => p.TipoId)  
-                .OnDelete(DeleteBehavior.SetNull); 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=banco.db");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Planta>()
+                .HasOne(p => p.Origem)
+                .WithMany(o => o.Plantas)
+                .HasForeignKey(p => p.OrigemId);
+
+            modelBuilder.Entity<Planta>()
+                .HasOne(p => p.Tipo)
+                .WithMany(t => t.Plantas)
+                .HasForeignKey(p => p.TipoId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
+}

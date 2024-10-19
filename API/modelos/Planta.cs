@@ -1,22 +1,23 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using API.modelos;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace API.Models;
-
-public class Planta
+namespace API.Models
 {
-    [Key]
-    public int IdPlanta { get; set; }
-    public string? Nome { get; set; }
+    public class Planta
+    {
+        [Key]
+        public int IdPlanta { get; set; }
+        public string Nome { get; set; } // Removido o '?', já que deve ser obrigatório
+        public DateTime CriadoEm { get; set; } = DateTime.Now;
 
-    public DateTime CriadoEm { get; set; } = DateTime.Now;
+        public int OrigemId { get; set; }
+        public int TipoId { get; set; }
 
-    public int OrigemId { get; set; }
+        [ForeignKey("OrigemId")]
+        public Origem Origem { get; set; } // Removido o '?', já que deve ser obrigatório
 
-    public required Origem Origem { get; set; }
-
-     public int TipoId { get; set; } 
-     public required Tipo Tipo { get; set; }
-    
+        [ForeignKey("TipoId")]
+        public Tipo Tipo { get; set; } // Removido o '?', já que deve ser obrigatório
+    }
 }
