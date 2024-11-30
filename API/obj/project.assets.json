@@ -2381,19 +2381,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Jean Gabriel\\.nuget\\packages\\": {}
+    "C:\\Users\\Maywo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jean Gabriel\\Downloads\\ProjetoDevVis\\API\\API.csproj",
+      "projectUniqueName": "C:\\Projeto pt II\\ProjetoDevVis\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\Jean Gabriel\\Downloads\\ProjetoDevVis\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\Jean Gabriel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jean Gabriel\\Downloads\\ProjetoDevVis\\API\\obj\\",
+      "projectPath": "C:\\Projeto pt II\\ProjetoDevVis\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\Maywo\\.nuget\\packages\\",
+      "outputPath": "C:\\Projeto pt II\\ProjetoDevVis\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Jean Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Maywo\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
