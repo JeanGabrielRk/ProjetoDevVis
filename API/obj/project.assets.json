@@ -2381,19 +2381,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Maywo\\.nuget\\packages\\": {}
+    "C:\\Users\\Lindomar\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projeto pt II\\ProjetoDevVis\\API\\API.csproj",
+      "projectUniqueName": "C:\\laura\\facul\\des de software visual\\projeto ecoplanta\\ProjetoDevVis\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Projeto pt II\\ProjetoDevVis\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\Maywo\\.nuget\\packages\\",
-      "outputPath": "C:\\Projeto pt II\\ProjetoDevVis\\API\\obj\\",
+      "projectPath": "C:\\laura\\facul\\des de software visual\\projeto ecoplanta\\ProjetoDevVis\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\Lindomar\\.nuget\\packages\\",
+      "outputPath": "C:\\laura\\facul\\des de software visual\\projeto ecoplanta\\ProjetoDevVis\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Maywo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Lindomar\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -2452,7 +2452,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
