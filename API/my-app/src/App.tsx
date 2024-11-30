@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import ListaPlanta from './Componentes/ListaPlanta';
 import CadastrarPlanta from './Componentes/CadastrarPlanta'
+import ExcluirPlanta from './Componentes/ExcluirPlanta'
+
 
 function App() {
   return (

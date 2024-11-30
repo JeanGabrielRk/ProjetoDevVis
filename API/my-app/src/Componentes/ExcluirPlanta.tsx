@@ -5,7 +5,7 @@ const ListaPlanta: React.FC = () => {
     const [planta, setPlanta] = useState<Planta[]>([]);
 
     useEffect(() => {
-        fetch('http://localhost:5022/api/tipos/listar')
+        fetch('http://localhost:5022/api/tipos/deletar')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro na requisição: ' + response.statusText);
@@ -20,6 +20,21 @@ const ListaPlanta: React.FC = () => {
             });
     }, []);
 
+    const excluirPlanta = (id: number) => {
+        fetch(`http://localhost:5022/api/tipos/deletar/${id}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao excluir planta: ' + response.statusText);
+                }
+                setPlanta(planta.filter(p => p.id !== id));
+            })
+            .catch(error => {
+                console.error('Erro ao excluir planta:', error);
+            });
+    };
+
     return (
         <div>
             <h1>Lista de Plantas</h1>
@@ -30,6 +45,7 @@ const ListaPlanta: React.FC = () => {
                         <th>Nome</th>
                         <th>Descrição</th>
                         <th>Criado Em</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,6 +55,9 @@ const ListaPlanta: React.FC = () => {
                             <td>{planta.nome}</td>
                             <td>{planta.descricao}</td>
                             <td>{new Date(planta.criadoEm).toLocaleDateString()}</td>
+                            <td>
+                                <button onClick={() => excluirPlanta(planta.id)}>Excluir</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
