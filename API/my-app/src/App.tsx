@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import ListaPlanta from './Componentes/ListaPlanta';
-import CadastrarPlanta from './Componentes/CadastrarPlanta'
-import ExcluirPlanta from './Componentes/ExcluirPlanta'
+import CadastrarPlanta from './Componentes/CadastrarPlanta';
+import ExcluirPlanta from './Componentes/ExcluirPlanta';
 
 
 function App() {
@@ -26,4 +26,9 @@ function App() {
   );
 }
 
-export default App;
+export default App; 
+
+
+
+
+
