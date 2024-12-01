@@ -1,36 +1,6 @@
-/*import React from 'react';
-import './App.css';
-import ListaPlanta from './Componentes/ListaPlanta';
-import CadastrarPlanta from './Componentes/CadastrarPlanta';
-import ExcluirPlanta from './Componentes/ExcluirPlanta';
-
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;  */
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import ListaPlantas from './Componentes/ListaPlantas';
+import ListaPlantas from './Componentes/ListaPlanta';
 import CadastrarPlanta from './Componentes/CadastrarPlanta';
 import ExcluirPlanta from './Componentes/ExcluirPlanta';
 import BuscarPlanta from './Componentes/BuscarPlanta';
