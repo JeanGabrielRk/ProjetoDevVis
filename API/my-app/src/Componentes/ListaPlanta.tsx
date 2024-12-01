@@ -5,7 +5,7 @@ const ListaPlantas: React.FC = () => {
     const [plantas, setPlantas] = useState<Planta[]>([]);
 
     useEffect(() => {
-        fetch('http://localhost:5022/api/plantas/listar')
+        fetch('http://localhost:5022/api/tipos/listar')
             .then(response => response.json())
             .then(data => setPlantas(data))
             .catch(error => console.error('Erro ao listar plantas:', error));
