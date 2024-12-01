@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'
 import { Planta } from '../Interfaces/Planta';
 
 const AlterarPlanta: React.FC = () => {
