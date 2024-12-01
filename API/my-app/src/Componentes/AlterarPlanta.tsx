@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Planta } from '../Interfaces/Planta';
 
+
 const AlterarPlanta: React.FC = () => {
-    const { id } = useParams<{ id: string }>(); 
-    const [nome, setNome] = useState('');
+ 
+    const id = localStorage.getItem('plantaId'); 
     const [origemId, setOrigemId] = useState<number | ''>('');
     const [tipoId, setTipoId] = useState<number | ''>('');
 
@@ -18,6 +19,8 @@ const AlterarPlanta: React.FC = () => {
                     setTipoId(data.tipoId);
                 })
                 .catch(error => alert('Erro ao carregar dados da planta: ' + error));
+        } else {
+            alert('ID da planta não encontrado');
         }
     }, [id]);
 
@@ -25,8 +28,13 @@ const AlterarPlanta: React.FC = () => {
         e.preventDefault();
         const planta = { nome, origemId: Number(origemId), tipoId: Number(tipoId) };
 
+        if (!id) {
+            alert('ID da planta não está disponível');
+            return;
+        }
+
         fetch(`http://localhost:5022/api/plantas/${id}`, {
-            method: 'PUT', // Usando PUT para alterar
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(planta),
         })
