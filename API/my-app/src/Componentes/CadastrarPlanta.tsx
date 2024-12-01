@@ -1,99 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import { Planta } from '../Interface/Planta';
+import React, { useState } from 'react';
 
-const ListaPlanta: React.FC = () => {
-    const [planta, setPlanta] = useState<Planta[]>([]);
+const CadastrarPlanta: React.FC = () => {
     const [nome, setNome] = useState('');
-    const [descricao, setDescricao] = useState('');
-
-    useEffect(() => {
-        fetch("http://localhost:5022/api/plantas/cadastrar")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro na requisição: ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                setPlanta(data);
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-            });
-    }, []);
+    const [origemId, setOrigemId] = useState<number | ''>('');
+    const [tipoId, setTipoId] = useState<number | ''>('');
 
     const cadastrarPlanta = (e: React.FormEvent) => {
-        e.preventDefault(); 
-        const novaPlanta = { nome, descricao };
+        e.preventDefault();
+        const planta = { nome, origemId: Number(origemId), tipoId: Number(tipoId) };
 
-        fetch("http://localhost:5022/api/plantas/cadastrar", {
+        fetch('http://localhost:5022/api/plantas/cadastrar', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(novaPlanta),
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(planta),
         })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao cadastrar planta: ' + response.statusText);
-                }
+                if (!response.ok) throw new Error('Erro ao cadastrar planta');
                 return response.json();
             })
-            .then(plantaCadastrada => {
-                setPlanta([...planta, plantaCadastrada]);
-                setNome(''); 
-                setDescricao(''); 
-            })
-            .catch(error => {
-                console.error('Erro ao cadastrar planta:', error);
-            });
+            .then(() => alert('Planta cadastrada com sucesso!'))
+            .catch(error => alert('Erro: ' + error));
     };
 
     return (
         <div>
-            <h1>Lista de Plantas</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Descrição</th>
-                        <th>Criado Em</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {planta.map(planta => (
-                        <tr key={planta.id}>
-                            <td>{planta.id}</td>
-                            <td>{planta.nome}</td>
-                            <td>{planta.descricao}</td>
-                            <td>{new Date(planta.criadoEm).toLocaleDateString()}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            <h2>Cadastrar Nova Planta</h2>
+            <h2>Cadastrar Planta</h2>
             <form onSubmit={cadastrarPlanta}>
                 <div>
                     <label>
                         Nome:
-                        <input
-                            type="text"
-                            value={nome}
-                            onChange={(e) => setNome(e.target.value)}
-                            required
-                        />
+                        <input type="text" value={nome} onChange={e => setNome(e.target.value)} required />
                     </label>
                 </div>
                 <div>
                     <label>
-                        Descrição:
-                        <textarea
-                            value={descricao}
-                            onChange={(e) => setDescricao(e.target.value)}
-                            required
-                        />
+                        Origem ID:
+                        <input type="number" value={origemId} onChange={e => setOrigemId(e.target.valueAsNumber || '')} required />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Tipo ID:
+                        <input type="number" value={tipoId} onChange={e => setTipoId(e.target.valueAsNumber || '')} required />
                     </label>
                 </div>
                 <button type="submit">Cadastrar</button>
@@ -102,4 +50,5 @@ const ListaPlanta: React.FC = () => {
     );
 };
 
-export default ListaPlanta;
+export default CadastrarPlanta;
+

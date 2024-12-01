@@ -3,8 +3,30 @@ using API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000")  // URL do seu front-end
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
+
 builder.Services.AddDbContext<AppDataContext>();
+
+
+builder.Services.AddControllers();
+
 var app = builder.Build();
+
+app.UseCors(MyAllowSpecificOrigins);
+
 
 app.MapGet("/", () => "ECO PLANTA");
 

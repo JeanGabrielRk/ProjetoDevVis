@@ -642,3 +642,6 @@ C:\Users\Jean Gabriel\Downloads\ProjetoDevVis\API\obj\Debug\net8.0\refint\API.dl
 C:\Users\Jean Gabriel\Downloads\ProjetoDevVis\API\obj\Debug\net8.0\API.pdb
 C:\Users\Jean Gabriel\Downloads\ProjetoDevVis\API\obj\Debug\net8.0\API.genruntimeconfig.cache
 C:\Users\Jean Gabriel\Downloads\ProjetoDevVis\API\obj\Debug\net8.0\ref\API.dll
+C:\laura\facul\des de software visual\projeto ecoplanta\ProjetoDevVis\API\bin\Debug\net8.0\my-app\package-lock.json
+C:\laura\facul\des de software visual\projeto ecoplanta\ProjetoDevVis\API\bin\Debug\net8.0\my-app\package.json
+C:\laura\facul\des de software visual\projeto ecoplanta\ProjetoDevVis\API\bin\Debug\net8.0\my-app\tsconfig.json

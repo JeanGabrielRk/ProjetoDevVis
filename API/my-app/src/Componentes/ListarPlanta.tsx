@@ -1,43 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { Planta } from '../Interface/Planta';
+import { Planta } from '../Interfaces/Planta';
 
-const ListaPlanta: React.FC = () => {
-    const [planta, setPlanta] = useState<Planta[]>([]);
+const ListaPlantas: React.FC = () => {
+    const [plantas, setPlantas] = useState<Planta[]>([]);
 
     useEffect(() => {
         fetch('http://localhost:5022/api/tipos/listar')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro na requisição: ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                setPlanta(data);
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-            });
+            .then(response => response.json())
+            .then(data => setPlantas(data))
+            .catch(error => console.error('Erro ao listar plantas:', error));
     }, []);
 
     return (
         <div>
-            <h1>Lista de Plantas</h1>
+            <h2>Lista de Plantas</h2>
             <table>
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
-                        <th>Descrição</th>
+                        <th>Origem</th>
+                        <th>Tipo</th>
                         <th>Criado Em</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {planta.map(planta => (
-                        <tr key={planta.id}>
-                            <td>{planta.id}</td>
+                    {plantas.map(planta => (
+                        <tr key={planta.idPlanta}>
+                            <td>{planta.idPlanta}</td>
                             <td>{planta.nome}</td>
-                            <td>{planta.descricao}</td>
+                            <td>{planta.origem?.pais || 'N/A'}</td>
+                            <td>{planta.tipo?.nome || 'N/A'}</td>
                             <td>{new Date(planta.criadoEm).toLocaleDateString()}</td>
                         </tr>
                     ))}
@@ -47,4 +40,4 @@ const ListaPlanta: React.FC = () => {
     );
 };
 
-export default ListaPlanta;
+export default ListaPlantas;
